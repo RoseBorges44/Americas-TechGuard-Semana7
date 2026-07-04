@@ -1,7 +1,9 @@
 # Período 7 — Nowcasting Espaço-Temporal de Inundações Urbanas com U-RNN
 
 **Americas TechGuard · Campus Florianópolis**
+
 **Estudante:** Rosemeri Borges (GitHub: [RoseBorges44](https://github.com/RoseBorges44))
+
 **Eixo:** Aprendizado Profundo · Hidrologia Urbana · Modelagem Espaço-Temporal · Python
 
 ---
@@ -40,12 +42,12 @@ hidrodinâmico, entregando *nowcasts* de 6 h em ~7 s (>100× mais rápido que o 
 
 **Entradas e saídas.**
 - *Entradas:* sequência de **intensidade de chuva** (janela W), **chuva acumulada** (capta o
-  "efeito integral"), e fatores espaciais — **DSM/DEM**, **impermeabilização**, **área de bueiros**.
+  "efeito integral"), e fatores espaciais  **DSM/DEM**, **impermeabilização**, **área de bueiros**.
 - *Saídas:* a cada passo, **mapa wet/dry** (classificação) e **profundidade da lâmina d'água**
   (regressão).
 
 **Arquitetura (ideia geral).** Backbone **U-like** (encoder-decoder) empilhado com blocos
-**Skip-ConvGRU** — uma ConvGRU com *skip connections* que funde, para cada célula: a saída do
+**Skip-ConvGRU**  uma ConvGRU com *skip connections* que funde, para cada célula: a saída do
 bloco anterior `I_t`, o estado de codificação do mesmo nível `He_t` e o estado de decodificação
 anterior `Hd_{t-1}` (recorrência → *latent autoregression*). Duas **heads desacopladas**:
 classificação (wet/dry, vira **máscara**) e regressão (profundidade, focada nas células molhadas).
@@ -69,7 +71,7 @@ o estado inicial. Resultado no artigo: até **~360× menos memória** de GPU.
 
 **Por que não usei a base oficial (dataset + pesos) diretamente.** Inspecionei o repositório
 oficial (`holmescao/U-RNN`, tutoriais 02-04). A inferência oficial exige, simultaneamente:
-(i) o **dataset UrbanFlood24** — **~115 GB** (a versão *Lite* de 128×128 ainda precisa ser baixada);
+(i) o **dataset UrbanFlood24**  **~115 GB** (a versão *Lite* de 128×128 ainda precisa ser baixada);
 (ii) **pesos pré-treinados** de 11-300 MB hospedados em **Google Drive / Baidu / Hugging Face**; e
 (iii) **uma GPU** (o próprio tutorial de inferência lista "any GPU" como requisito; a instalação é
 feita para CUDA em RTX 4090). No ambiente de execução que usei **não há GPU** e a rede só alcança
@@ -81,18 +83,18 @@ a solução **execute e gere saídas verificáveis**.
 **Minha estratégia.** Reconstruí os **componentes conceituais** do U-RNN em escala reduzida e
 substituí o MIKE+ por um **surrogate**: um **autômato celular de inundação** (chuva → escoamento
 → roteamento por gravidade → drenagem) sobre um **terreno sintético tipo vale do Itajaí**. A
-U-RNN aprende a **emular** esse modelo numérico — exatamente o paradigma do artigo, só que com
+U-RNN aprende a **emular** esse modelo numérico, exatamente o paradigma do artigo, só que com
 um "ground truth" que eu posso gerar sem licença nem GPU.
 
 > **Isto está alinhado com os próprios autores.** O `quickstart.ipynb` oficial tem uma *"Architecture
 > Demo (Synthetic Data)"* que cria "a tiny **synthetic dataset** (random DEM + rainfall + flood)" e
-> roda o modelo — **"No real data needed"**. Ou seja, usar dados sintéticos para demonstrar a
+> roda o modelo  **"No real data needed"**. Ou seja, usar dados sintéticos para demonstrar a
 > arquitetura é o caminho acessível recomendado no repositório. Nós **fomos além do quickstart**:
 > em vez de um único *forward pass*, montamos um surrogate físico (não aleatório), **treinamos** com
 > o paradigma SWP, **avaliamos** (CSI/PR²/MAE/RMSE) e contextualizamos em Blumenau.
 
 **Ambiente (reprodutível).** Testado em Python **3.12.3**, PyTorch **2.12.1**, NumPy **2.4**,
-Matplotlib **3.10** — ver `requirements.txt`. O notebook é *device-aware* (usa GPU se houver). A
+Matplotlib **3.10**  ver `requirements.txt`. O notebook é *device-aware* (usa GPU se houver). A
 **execução de referência entregue** foi em **Colab GPU, 56 épocas do zero** (grade 40×40, T=48, K=16);
 também roda em CPU via treino incremental por blocos com checkpoint.
 
@@ -167,7 +169,7 @@ Registro honesto do caminho, porque foi debugando que entendi de fato o modelo:
 
 ### Conexão com as semanas anteriores
 
-Esta entrega fecha um arco: a **Semana 5 (NDVI Blumenau)** mapeou a cobertura vegetal — que informa
+Esta entrega fecha um arco: a **Semana 5 (NDVI Blumenau)** mapeou a cobertura vegetal que informa
 o **coeficiente de escoamento** (aqui representado pela camada de impermeabilização); a **Semana 6
 (HAND Blumenau)** produziu a suscetibilidade estática a inundação — e agora a Semana 7 dá o passo
 seguinte: a **dinâmica no tempo**. Numa evolução real, o **DEM/HAND da Semana 6 substituiria o DEM
