@@ -118,7 +118,7 @@ também roda em CPU via treino incremental por blocos com checkpoint.
 O que **mantivemos fiel:** Skip-ConvGRU (Eq. 1), backbone U-like encoder-decoder, heads desacopladas
 com máscara de classificação, paradigma SWP, perdas Focal BCE + MSE ponderada, e o próprio paradigma
 "aprender a emular um modelo numérico". O que **reduzimos:** escala espacial/temporal, nº de eventos,
-capacidade da rede e o ground truth (surrogate no lugar do MIKE+) — tudo por restrição de recursos, e
+capacidade da rede e o ground truth (surrogate no lugar do MIKE+) tudo por restrição de recursos, e
 explicitamente autorizado pelo enunciado.
 
 ---
@@ -151,7 +151,7 @@ O notebook **`URNN_Blumenau_Nowcasting.ipynb`** reúne tudo num fluxo executáve
 ### Notas de desenvolvimento (erros encontrados e como resolvi)
 
 Registro honesto do caminho, porque foi debugando que entendi de fato o modelo:
-- **Inundação cobrindo 98% do domínio.** No começo o autômato alagava tudo — o relevo estava
+- **Inundação cobrindo 98% do domínio.** No começo o autômato alagava tudo o relevo estava
   normalizado em 1 m, muito raso perto das lâminas d'água. **Solução:** escalei o DEM para ~15 m
   de desnível e adicionei contorno aberto + drenagem do canal (o rio escoa). Aí a cheia ficou
   localizada (pico ~34% molhado), como o artigo descreve.
