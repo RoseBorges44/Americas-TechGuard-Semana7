@@ -13,7 +13,7 @@
 Uma **reimplementação didática e reduzida** do modelo **U-RNN** (Cao et al., 2025) para
 *nowcasting* espaço-temporal de inundações urbanas, em PyTorch, que **executa em Colab (GPU ou CPU)**,
 sem depender de infraestrutura pesada. O pipeline treina, infere e gera saídas verificáveis (mapas, hidrogramas,
-métricas), contextualizado no **Vale do Itajaí / Blumenau-SC** — dando continuidade às
+métricas), contextualizado no **Vale do Itajaí / Blumenau-SC**, dando continuidade às
 Semanas 5 (NDVI Blumenau) e 6 (HAND Blumenau).
 
 > **Importante (precisão conceitual exigida pelo enunciado):** isto é **nowcasting**, não
