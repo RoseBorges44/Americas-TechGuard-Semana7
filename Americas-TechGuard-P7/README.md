@@ -1,6 +1,6 @@
 # Período 7 — Nowcasting Espaço-Temporal de Inundações Urbanas com U-RNN
 
-**Americas TechGuard · Centro Universitário SENAI/SC — Campus Florianópolis**
+**Americas TechGuard · Campus Florianópolis**
 **Estudante:** Rosemeri Borges (GitHub: [RoseBorges44](https://github.com/RoseBorges44))
 **Eixo:** Aprendizado Profundo · Hidrologia Urbana · Modelagem Espaço-Temporal · Python
 
