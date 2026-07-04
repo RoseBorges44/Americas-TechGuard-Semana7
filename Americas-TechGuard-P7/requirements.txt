@@ -1,0 +1,9 @@
+# Período 7 — U-RNN Nowcasting (Americas TechGuard / SENAI-SC)
+# Testado em: Python 3.12.3
+# ---------------------------------------------------------------
+torch>=2.0        # testado com 2.12.1
+numpy>=1.24       # testado com 2.4.4
+matplotlib>=3.6   # testado com 3.10.8
+# ---------------------------------------------------------------
+# Para abrir/executar o notebook localmente (no Colab já vêm instalados):
+#   jupyter, nbconvert, ipykernel
